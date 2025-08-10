@@ -18,10 +18,13 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
 
-    - name: Install Gradle
+    - name: Install Gradle 7.5
       run: |
         sudo apt-get update
-        sudo apt-get install -y gradle
+        sudo apt-get install wget unzip -y
+        wget https://services.gradle.org/distributions/gradle-7.5-bin.zip
+        unzip -qq gradle-7.5-bin.zip -d /opt
+        echo "/opt/gradle-7.5/bin" >> $GITHUB_PATH
 
     - name: Build Debug APK
       run: gradle assembleDebug
